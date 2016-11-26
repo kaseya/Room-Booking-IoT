@@ -18,20 +18,20 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!-- Background Image - TODO: Load from config -->
-        <Image Grid.RowSpan="4" Stretch="UniformToFill" Opacity="0.15"  Source="Assets/OfficeSpace.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Image x:Name="ScreenBackground" Grid.RowSpan="4" Stretch="UniformToFill" Opacity="0.15"  Source="Assets/OfficeSpace.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
         <!-- TOP BANNER -->
         <Grid Grid.Row="0" Padding="20">
             <Grid.RowDefinitions>
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Column="0" Grid.Row="1"  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock FontFamily="Segoe UI SemiBold" Foreground="#FEFEFE" FontSize="50pt" HorizontalAlignment="Left">Your logo here</TextBlock>
-                <TextBlock Grid.Column="1" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold"  Foreground="#FEFEFE" FontSize="90pt" HorizontalAlignment="Right">3:45pm</TextBlock>
+                <Image Height="90" x:Name="CompanyLogo" Source="Assets/CompanyLogo.png" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock x:Name="Label_CurrentTime" Grid.Column="1" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold"  Foreground="#FEFEFE" FontSize="45pt" HorizontalAlignment="Right">3:45pm</TextBlock>
             </Grid>
         </Grid>
             
@@ -41,12 +41,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
                 
-            <TextBlock Grid.Row="0" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold" Foreground="#FEFEFE" FontSize="75pt" HorizontalAlignment="Left">Conference Room</TextBlock>
-            <TextBlock Grid.Row="1" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="40pt" HorizontalAlignment="Left">No meeting booked</TextBlock>
+            <TextBlock x:Name="Label_RoomName" Grid.Row="0" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold" Foreground="#FEFEFE" FontSize="55pt" HorizontalAlignment="Left" VerticalAlignment="Bottom">Conference Room</TextBlock>
+            <TextBlock x:Name="Label_RoomNameSecondary" Grid.Row="1" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="30pt" HorizontalAlignment="Left" VerticalAlignment="Top">No meeting booked</TextBlock>
 
         </Grid>
             
@@ -56,22 +56,22 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontFamily="Segoe UI SemiBold" Foreground="#FEFEFE" FontSize="50pt" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Available</TextBlock>
-                <TextBlock Grid.Row="1" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="40pt" HorizontalAlignment="Left" VerticalAlignment="Top">Until 4:30pm</TextBlock>
-            </Grid>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="Label_RoomAvailability" Grid.Row="0" FontFamily="Segoe UI SemiBold" Foreground="#FEFEFE" FontSize="45pt" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Available</TextBlock>
+            <TextBlock x:Name="Label_RoomAvailabilityTimeBlock" Grid.Row="1" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="40pt" HorizontalAlignment="Left" VerticalAlignment="Top">Until 4:30pm</TextBlock>
+        </Grid>
             
             <!-- Bottom Panel -->
         <Grid Grid.Row="3" Padding="20">
                 <Grid.RowDefinitions>
-                <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" FontFamily="Segoe UI" Background="Transparent" Foreground="#FEFEFE" FontSize="50pt" FontWeight="Normal" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="3" Padding="20" Style="{StaticResource RoundedButtonStyle}" >
+            <Button x:Name="Button_StartMeeting" Grid.Row="0" FontFamily="Segoe UI" Background="Transparent" Foreground="#FEFEFE" FontSize="25pt" FontWeight="Normal" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="3" Padding="20" Style="{StaticResource RoundedButtonStyle}" >
                 Start a Meeting
             </Button>
             </Grid>
