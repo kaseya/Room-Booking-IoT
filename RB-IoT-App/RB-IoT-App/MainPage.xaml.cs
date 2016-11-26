@@ -26,10 +26,6 @@ namespace RB_IoT_App
         public MainPage()
         {
             this.InitializeComponent();
-
-            ApplicationView.PreferredLaunchViewSize = new Size(800, 480);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-
         }
     }
 }
