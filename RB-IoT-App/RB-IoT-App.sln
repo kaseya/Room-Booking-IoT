@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RB-IoT-App", "RB-IoT-App\RB-IoT-App.csproj", "{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|ARM.Build.0 = Debug|ARM
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|x64.ActiveCfg = Debug|x64
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|x64.Build.0 = Debug|x64
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|x64.Deploy.0 = Debug|x64
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|x86.ActiveCfg = Debug|x86
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|x86.Build.0 = Debug|x86
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Debug|x86.Deploy.0 = Debug|x86
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|ARM.ActiveCfg = Release|ARM
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|ARM.Build.0 = Release|ARM
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|ARM.Deploy.0 = Release|ARM
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x64.ActiveCfg = Release|x64
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x64.Build.0 = Release|x64
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x64.Deploy.0 = Release|x64
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x86.ActiveCfg = Release|x86
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x86.Build.0 = Release|x86
+		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
