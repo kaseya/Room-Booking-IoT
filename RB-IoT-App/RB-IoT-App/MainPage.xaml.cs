@@ -14,8 +14,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace RB_IoT_App
 {
     /// <summary>
@@ -23,9 +21,13 @@ namespace RB_IoT_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        Settings settings = new Settings();
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.Label_RoomName.Text = settings.RoomName;    
         }
     }
 }
