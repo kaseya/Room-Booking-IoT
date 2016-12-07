@@ -27,7 +27,18 @@ namespace RB_IoT_App
         {
             this.InitializeComponent();
 
-            this.Label_RoomName.Text = settings.RoomName;    
+            this.Label_RoomName.Text = settings.RoomName;
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += RefreshClock;
+            timer.Start();
+        }
+
+        private void RefreshClock(object sender, object e)
+        {
+            DateTime dt = DateTime.Now;
+
+            Label_CurrentTime.Text = dt.ToString("MM/dd HH:mm:ss");
         }
     }
 }
