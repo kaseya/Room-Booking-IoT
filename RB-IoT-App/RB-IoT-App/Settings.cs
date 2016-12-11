@@ -12,11 +12,15 @@ namespace RB_IoT_App
     public class Settings
     {
         private StorageFolder _localFolder = ApplicationData.Current.LocalFolder;
+        private string _defaultRoomName = "Conference Room";
         private string _defaultCompanyLogo = "Assets/CompanyLogo.png";
+        private string _defaultTimeFormat = "hh:mm tt";
 
         private string defaultSettings = 
             "{" + System.Environment.NewLine +
-                "'roomName':'Conference Room'" + System.Environment.NewLine +
+                "'roomName':'Conference Room'," + System.Environment.NewLine +
+                "'companyLogo':'Assets/CompanyLogo.png'," + System.Environment.NewLine +
+                "'timeFormat':'hh:mm tt'" + System.Environment.NewLine +
             "}";
 
         private SettingsData _settings;
@@ -52,12 +56,19 @@ namespace RB_IoT_App
                 
                 try
                 {
-                    _roomName = _settings.RoomName;
+                    if (String.IsNullOrEmpty(_settings.RoomName))
+                    {
+                        _roomName = _defaultRoomName;
+                    }
+                    else
+                    {
+                        _roomName = _settings.RoomName;
+                    }
                 }
                 catch( Exception e)
                 {
                     // TODO: Write to generic log
-                    _roomName = "Conference Room";
+                    _roomName = _defaultRoomName;
                 }
 
                 return _roomName;
@@ -95,6 +106,31 @@ namespace RB_IoT_App
                 return _companyLogo;
             }
         }
+
+        public string TimeFormat
+        {
+            get
+            {
+                string _timeFormat = String.Empty;
+
+                try
+                {
+                    // TODO: Does .NET have a TryParse() for format strings?? If so, we should validate this input
+                    _timeFormat = _settings.TimeFormat;
+                    if( _timeFormat == null )
+                    {
+                        _timeFormat = _defaultTimeFormat;
+                    }
+                }
+                catch (Exception)
+                {
+                    // TODO: Write to generic log
+                    _timeFormat = _defaultTimeFormat;
+                }
+
+                return _timeFormat;
+            }
+        }
     }
 
     class SettingsData
@@ -102,5 +138,6 @@ namespace RB_IoT_App
         public string RoomName { get; set; }
         public string CompanyLogo { get; set; }
         public string BackgroundImage { get; set; }
+        public string TimeFormat { get; set; }
     }
 }

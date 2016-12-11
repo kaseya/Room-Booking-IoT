@@ -22,6 +22,8 @@ namespace RB_IoT_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private bool showColon = true;
+
         Settings settings = new Settings();
 
         public MainPage()
@@ -39,9 +41,22 @@ namespace RB_IoT_App
 
         private void RefreshClock(object sender, object e)
         {
+            animateTick(settings.TimeFormat, showColon);
+        }
+
+        // TODO: For some reason this isn't animating to blink the colon. It may be the redraw doesn't refresh fast enough
+        private void animateTick(string timeFormat, bool showColon )
+        {
+            if( !showColon )
+            {
+                timeFormat = timeFormat.Replace(':', ' ');    
+            }
+
             DateTime dt = DateTime.Now;
 
-            Label_CurrentTime.Text = dt.ToString("HH:mm tt");
+            Label_CurrentTime.Text = dt.ToString(timeFormat);
+            
+            this.showColon = !showColon;
         }
 
         private void SetCompanyLogo( string logoLocation )
