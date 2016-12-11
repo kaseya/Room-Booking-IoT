@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace RB_IoT_App
     public class Settings
     {
         private StorageFolder _localFolder = ApplicationData.Current.LocalFolder;
+        private string _defaultCompanyLogo = "Assets/CompanyLogo.png";
 
         private string defaultSettings = 
             "{" + System.Environment.NewLine +
@@ -64,10 +66,41 @@ namespace RB_IoT_App
             {
             }
         }
+
+        public string CompanyLogo
+        {
+            get
+            {
+                string _companyLogo = String.Empty;
+
+                try
+                {
+                    FileInfo fileInfo = new FileInfo(_settings.CompanyLogo);
+                    if( fileInfo != null && fileInfo.Exists)
+                    {
+                        _companyLogo = _settings.CompanyLogo;
+                    }
+                    else
+                    {
+                        _companyLogo = _defaultCompanyLogo;
+                    }
+                }
+                catch( Exception )
+                {
+                    // TODO: Write to generic log
+                    _companyLogo = _defaultCompanyLogo;
+
+                }
+
+                return _companyLogo;
+            }
+        }
     }
 
     class SettingsData
     {
         public string RoomName { get; set; }
+        public string CompanyLogo { get; set; }
+        public string BackgroundImage { get; set; }
     }
 }
