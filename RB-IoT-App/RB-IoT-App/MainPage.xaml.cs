@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -50,7 +51,8 @@ namespace RB_IoT_App
         {
             if( !showColon )
             {
-                timeFormat = timeFormat.Replace(':', ' ');    
+                // TODO: This hack didn't work. Commenting out until we have a better idea of blinking the ':'
+                //timeFormat = timeFormat.Replace(':', ' ');    
             }
 
             DateTime dt = DateTime.Now;
@@ -98,6 +100,62 @@ namespace RB_IoT_App
             {
                 // TODO: Add generic logging
             }
+        }
+
+        private async void Button_StartMeeting_Click(object sender, RoutedEventArgs e)
+        {
+            string[] timeBlocks = GetTimeBlocks(DateTime.Now);
+            
+            var messageDialog = new MessageDialog("How long would you like to book this room?");
+            
+            messageDialog.Commands.Add(new UICommand(timeBlocks[0],new UICommandInvokedHandler(this.CommandBookOneBlock)));
+            messageDialog.Commands.Add(new UICommand(timeBlocks[1],new UICommandInvokedHandler(this.CommandBookTwoBlocks)));
+            messageDialog.Commands.Add(new UICommand(timeBlocks[2], new UICommandInvokedHandler(this.CommandBookThreeBlocks)));
+
+            // Show the message dialog
+            await messageDialog.ShowAsync();
+        }
+
+        private void CommandBookOneBlock(IUICommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CommandBookTwoBlocks(IUICommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CommandBookThreeBlocks(IUICommand command)
+        {
+            throw new NotImplementedException();
+        }
+        
+        private string [] GetTimeBlocks(DateTime dt)
+        {
+            string[] timeBlocks = { "", "", "" };
+
+            DateTime nextBlock = dt;
+
+            if( dt.Minute < 30 )
+            {
+                nextBlock = nextBlock.AddMinutes(30-dt.Minute);
+            }
+            else
+            {
+                nextBlock = nextBlock.AddMinutes(60-dt.Minute);
+            }
+
+            timeBlocks[0] = "Until " + nextBlock.ToString(settings.TimeFormat);
+
+            nextBlock = nextBlock.AddMinutes(30);
+            timeBlocks[1] = "Until " + nextBlock.ToString(settings.TimeFormat);
+
+            nextBlock = nextBlock.AddMinutes(30);
+            timeBlocks[2] = "Until " + nextBlock.ToString(settings.TimeFormat);
+
+
+            return timeBlocks;
         }
     }
 }
