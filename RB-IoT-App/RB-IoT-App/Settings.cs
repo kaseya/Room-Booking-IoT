@@ -14,12 +14,14 @@ namespace RB_IoT_App
         private StorageFolder _localFolder = ApplicationData.Current.LocalFolder;
         private string _defaultRoomName = "Conference Room";
         private string _defaultCompanyLogo = "Assets/CompanyLogo.png";
+        private string _defaultBackgroundImage = "Assets/OfficeSpace.jpg";
         private string _defaultTimeFormat = "hh:mm tt";
 
         private string defaultSettings = 
             "{" + System.Environment.NewLine +
                 "'roomName':'Conference Room'," + System.Environment.NewLine +
                 "'companyLogo':'Assets/CompanyLogo.png'," + System.Environment.NewLine +
+                "'backgroundImage':'Assets/OfficeSpace.png'," + System.Environment.NewLine +
                 "'timeFormat':'hh:mm tt'" + System.Environment.NewLine +
             "}";
 
@@ -104,6 +106,35 @@ namespace RB_IoT_App
                 }
 
                 return _companyLogo;
+            }
+        }
+
+        public string BackgroundImage
+        {
+            get
+            {
+                string _backgroundImage = String.Empty;
+
+                try
+                {
+                    FileInfo fileInfo = new FileInfo(_settings.BackgroundImage);
+                    if (fileInfo != null && fileInfo.Exists)
+                    {
+                        _backgroundImage = _settings.BackgroundImage;
+                    }
+                    else
+                    {
+                        _backgroundImage = _defaultBackgroundImage;
+                    }
+                }
+                catch (Exception)
+                {
+                    // TODO: Write to generic log
+                    _backgroundImage = _defaultBackgroundImage;
+
+                }
+
+                return _backgroundImage;
             }
         }
 

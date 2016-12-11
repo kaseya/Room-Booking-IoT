@@ -30,6 +30,7 @@ namespace RB_IoT_App
         {
             this.InitializeComponent();
 
+            SetBackgroundImage(settings.BackgroundImage);
             SetCompanyLogo(settings.CompanyLogo);
                   
             this.Label_RoomName.Text = settings.RoomName;
@@ -67,25 +68,33 @@ namespace RB_IoT_App
                 throw new ArgumentNullException("The company logo cannot be empty");
             }
 
-            string imgPath = "ms-appx://";
-
-            if( logoLocation.StartsWith("/"))
-            {
-                imgPath += logoLocation.Substring(1);
-            }
-            else
-            {
-                imgPath += logoLocation;
-            }
-
             try
             {
-                //BitmapImage image = new BitmapImage(new Uri( imgPath, UriKind.Absolute));
                 BitmapImage image = new BitmapImage(new Uri(this.BaseUri, logoLocation));
                 
                 this.CompanyLogo.Source = image;
             }
             catch( Exception e )
+            {
+                // TODO: Add generic logging
+            }
+        }
+
+        private void SetBackgroundImage(string imgLocation)
+        {
+            if (String.IsNullOrEmpty(imgLocation))
+            {
+                // This should never happen
+                throw new ArgumentNullException("The background image cannot be empty");
+            }
+
+            try
+            {
+                BitmapImage image = new BitmapImage(new Uri(this.BaseUri, imgLocation));
+
+                this.ScreenBackground.Source = image;
+            }
+            catch (Exception e)
             {
                 // TODO: Add generic logging
             }
