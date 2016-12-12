@@ -31,7 +31,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Image Height="90" x:Name="CompanyLogo" Source="Assets/CompanyLogo.png" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                <TextBlock x:Name="Label_CurrentTime" Grid.Column="1" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold"  Foreground="#FEFEFE" FontSize="45pt" HorizontalAlignment="Right">3:45pm</TextBlock>
+                <TextBlock x:Name="Label_CurrentTime" Grid.Column="1" FontFamily="Consolas" FontWeight="SemiBold"  Foreground="#FEFEFE" FontSize="45pt" HorizontalAlignment="Right">3:45pm</TextBlock>
             </Grid>
         </Grid>
             

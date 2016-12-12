@@ -37,6 +37,7 @@ namespace RB_IoT_App
             this.Label_RoomName.Text = settings.RoomName;
 
             DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += RefreshClock;
             timer.Start();
         }
@@ -52,7 +53,7 @@ namespace RB_IoT_App
             if( !showColon )
             {
                 // TODO: This hack didn't work. Commenting out until we have a better idea of blinking the ':'
-                //timeFormat = timeFormat.Replace(':', ' ');    
+                timeFormat = timeFormat.Replace(':', ' ');    
             }
 
             DateTime dt = DateTime.Now;
