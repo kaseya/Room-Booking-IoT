@@ -26,10 +26,13 @@ namespace RB_IoT_App
         private bool showColon = true;
 
         Settings settings = new Settings();
-
+        CalendarEventsManager meetingsManager = new CalendarEventsManager();
+        
         public MainPage()
         {
             this.InitializeComponent();
+
+            meetingsManager.GetMeetings("meetings.json");
 
             SetBackgroundImage(settings.BackgroundImage);
             SetCompanyLogo(settings.CompanyLogo);
@@ -38,12 +41,23 @@ namespace RB_IoT_App
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += RefreshClock;
+            timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
+
+            DispatcherTimer meetingRefresher = new DispatcherTimer();
+            meetingRefresher.Tick += RefreshMeetingInfo;
+            meetingRefresher.Interval = new TimeSpan(0, 1, 0);
+            meetingRefresher.Start();
         }
 
         private void RefreshClock(object sender, object e)
         {
             animateTick(settings.TimeFormat, showColon);
+        }
+
+        private void RefreshMeetingInfo(object sender, object e)
+        {
+            CalendarEvent meetingInfo = meetingsManager.GetMeetingInfo();
         }
 
         // TODO: For some reason this isn't animating to blink the colon. It may be the redraw doesn't refresh fast enough
