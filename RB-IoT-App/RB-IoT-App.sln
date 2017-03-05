@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RB-IoT-App", "RB-IoT-App\RB-IoT-App.csproj", "{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RB-IoT-UnitTests", "RB-IoT-UnitTests\RB-IoT-UnitTests.csproj", "{57DCA371-AF18-41D5-8A35-544232AF5B83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +35,24 @@ Global
 		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x86.ActiveCfg = Release|x86
 		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x86.Build.0 = Release|x86
 		{2093CB2A-C22C-4E25-BC4B-EDE05C5835EE}.Release|x86.Deploy.0 = Release|x86
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|ARM.ActiveCfg = Debug|ARM
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|ARM.Build.0 = Debug|ARM
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|ARM.Deploy.0 = Debug|ARM
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|x64.ActiveCfg = Debug|x64
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|x64.Build.0 = Debug|x64
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|x64.Deploy.0 = Debug|x64
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|x86.ActiveCfg = Debug|x86
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|x86.Build.0 = Debug|x86
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Debug|x86.Deploy.0 = Debug|x86
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|ARM.ActiveCfg = Release|ARM
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|ARM.Build.0 = Release|ARM
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|ARM.Deploy.0 = Release|ARM
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|x64.ActiveCfg = Release|x64
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|x64.Build.0 = Release|x64
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|x64.Deploy.0 = Release|x64
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|x86.ActiveCfg = Release|x86
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|x86.Build.0 = Release|x86
+		{57DCA371-AF18-41D5-8A35-544232AF5B83}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,13 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#11892e" VerticalAlignment="Stretch">
+    <Grid Background="#11892e" VerticalAlignment="Stretch" x:Name="BackgroundCanvas">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -21,7 +21,7 @@
         <Image x:Name="ScreenBackground" Grid.RowSpan="4" Stretch="UniformToFill" Opacity="0.15"  Source="Assets/OfficeSpace.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
         <!-- TOP BANNER -->
-        <Grid Grid.Row="0" Padding="20">
+        <Grid Grid.Row="0" Padding="20,10,20,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -36,22 +36,23 @@
         </Grid>
             
         <!-- ROOM NAME -->
-        <Grid Grid.Row="1" Padding="20">
+        <Grid Grid.Row="1" Padding="20,0,20,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-                
-            <TextBlock x:Name="Label_RoomName" Grid.Row="0" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold" Foreground="#FEFEFE" FontSize="55pt" HorizontalAlignment="Left" VerticalAlignment="Bottom">Conference Room</TextBlock>
-            <TextBlock x:Name="Label_RoomNameSecondary" Grid.Row="1" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="30pt" HorizontalAlignment="Left" VerticalAlignment="Top">No meeting booked</TextBlock>
 
+            <TextBlock x:Name="Label_RoomName" Grid.Row="0" FontFamily="Segoe UI SemiBold" FontWeight="SemiBold" Foreground="#FEFEFE" FontSize="55pt" HorizontalAlignment="Left" VerticalAlignment="Bottom">Conference Room</TextBlock>
+            <TextBlock x:Name="Label_RoomUsage" Grid.Row="1" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="30pt" HorizontalAlignment="Left" VerticalAlignment="Top">No meeting booked</TextBlock>
+            <TextBlock x:Name="Label_RoomHost" Grid.Row="2" FontFamily="Segoe UI SemiBold" FontWeight="Normal" Foreground="#FEFEFE" FontSize="30pt" HorizontalAlignment="Left" VerticalAlignment="Top"> </TextBlock>
         </Grid>
             
         <!-- AVAILABILITY -->
-        <Grid Grid.Row="2" Padding="20">
+        <Grid Grid.Row="2" Padding="20,10,20,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -64,17 +65,25 @@
         </Grid>
             
             <!-- Bottom Panel -->
-        <Grid Grid.Row="3" Padding="20">
+        <Grid Grid.Row="3" Padding="20,10,20,0" x:Name="ButtonPanel">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-            <Button x:Name="Button_StartMeeting" Grid.Row="0" FontFamily="Segoe UI" Background="Transparent" Foreground="#FEFEFE" FontSize="25pt" FontWeight="Normal" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="3" Padding="20" Style="{StaticResource RoundedButtonStyle}" Click="Button_StartMeeting_Click" >
+                    <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Button_StartMeeting" Grid.Row="0" Grid.ColumnSpan="2" FontFamily="Segoe UI" Background="Transparent" Foreground="#FEFEFE" FontSize="25pt" FontWeight="Normal" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="3" Padding="20" Style="{StaticResource RoundedButtonStyle}" Click="Button_StartMeeting_Click" >
                 Start a Meeting
             </Button>
-            </Grid>
+            <Button Visibility="Collapsed" Margin="0,0,10,0" x:Name="Button_EndMeeting" Grid.Row="0" Grid.Column="0" FontFamily="Segoe UI" Background="Transparent" Foreground="#FEFEFE" FontSize="25pt" FontWeight="Normal" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="3" Padding="20" Style="{StaticResource RoundedButtonStyle}" Click="Button_EndMeeting_Click" >
+                End Meeting
+            </Button>
+            <Button Visibility="Collapsed" Margin="10,0,0,0" x:Name="Button_ExtendMeeting" Grid.Row="0" Grid.Column="1" FontFamily="Segoe UI" Background="Transparent" Foreground="#FEFEFE" FontSize="25pt" FontWeight="Normal" HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="3" Padding="20" Style="{StaticResource RoundedButtonStyle}" Click="Button_ExtendMeeting_Click" >
+                Extend Meeting
+            </Button>
+
+        </Grid>
             
     </Grid>
 </Page>

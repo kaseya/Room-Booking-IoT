@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -23,6 +24,7 @@ namespace RB_IoT_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private readonly SynchronizationContext synchronizationContext;
         private bool showColon = true;
 
         Settings settings = new Settings();
@@ -31,6 +33,8 @@ namespace RB_IoT_App
         public MainPage()
         {
             this.InitializeComponent();
+
+            synchronizationContext = SynchronizationContext.Current;
 
             meetingsManager.GetMeetings("meetings.json");
 
@@ -48,6 +52,9 @@ namespace RB_IoT_App
             meetingRefresher.Tick += RefreshMeetingInfo;
             meetingRefresher.Interval = new TimeSpan(0, 1, 0);
             meetingRefresher.Start();
+
+            LoadCurrentMeetingInfo();
+
         }
 
         private void RefreshClock(object sender, object e)
@@ -57,7 +64,44 @@ namespace RB_IoT_App
 
         private void RefreshMeetingInfo(object sender, object e)
         {
+            LoadCurrentMeetingInfo();
+        }
+
+        private void LoadCurrentMeetingInfo()
+        {
+
             CalendarEvent meetingInfo = meetingsManager.GetMeetingInfo();
+
+            synchronizationContext.Post(new SendOrPostCallback(o =>
+            {
+                Label_RoomUsage.Text = GetMeetingDescription((CalendarEvent)o);
+                Label_RoomHost.Text = GetMeetingHost((CalendarEvent)o);
+                ShowRoomAvailability((CalendarEvent)o);
+
+            }), meetingInfo);
+ 
+        }
+
+        private void ShowRoomAvailability(CalendarEvent meetingInfo)
+        {
+            if( meetingInfo != null )
+            {
+                Label_RoomAvailability.Text = "Busy";
+                Label_RoomAvailabilityTimeBlock.Text = "Until " + meetingInfo.End.ToLocalTime().ToString(settings.TimeFormat);
+                BackgroundCanvas.Background = new SolidColorBrush(
+                                                Windows.UI.Color.FromArgb(255, 154, 5, 24));
+
+                BuildButtonPanel(false);
+            }
+            else
+            {
+                Label_RoomAvailability.Text = "Available";
+                Label_RoomAvailabilityTimeBlock.Text = "";
+                BackgroundCanvas.Background = new SolidColorBrush(
+                                                Windows.UI.Color.FromArgb(255, 17, 137, 46));
+
+                BuildButtonPanel(true);
+            }
         }
 
         // TODO: For some reason this isn't animating to blink the colon. It may be the redraw doesn't refresh fast enough
@@ -132,19 +176,34 @@ namespace RB_IoT_App
 
         private void CommandBookOneBlock(IUICommand command)
         {
-            throw new NotImplementedException();
+            BookMeeting(1);
         }
 
         private void CommandBookTwoBlocks(IUICommand command)
         {
-            throw new NotImplementedException();
+            BookMeeting(2);
         }
 
         private void CommandBookThreeBlocks(IUICommand command)
         {
-            throw new NotImplementedException();
+            BookMeeting(3);
         }
-        
+
+        private void CommandExtendOneBlock(IUICommand command)
+        {
+            ExtendMeeting(1);
+        }
+
+        private void CommandExtendTwoBlocks(IUICommand command)
+        {
+            ExtendMeeting(2);
+        }
+
+        private void CommandExtendThreeBlocks(IUICommand command)
+        {
+            ExtendMeeting(3);
+        }
+
         private string [] GetTimeBlocks(DateTime dt)
         {
             string[] timeBlocks = { "", "", "" };
@@ -170,6 +229,104 @@ namespace RB_IoT_App
 
 
             return timeBlocks;
+        }
+
+        private string GetMeetingDescription(CalendarEvent evt)
+        {
+            string desc = String.Empty;
+
+            if( evt != null )
+            {
+                if( !String.IsNullOrEmpty(evt.Description) )
+                {
+                    desc = evt.Description;
+                }
+                else
+                {
+                    desc = "Private meeting";
+                }
+            }
+            else
+            {
+                desc = "No meeting booked";
+            }
+
+            return desc;
+        }
+
+        private string GetMeetingHost(CalendarEvent evt)
+        {
+            string desc = String.Empty;
+            var data = String.Empty;
+
+            if (evt != null)
+            {
+                if (!String.IsNullOrEmpty(evt.OrganizerName))
+                {
+                    data = "Hosted by " + evt.OrganizerName;
+                }
+                else
+                {
+                    data = "";
+                }
+
+            }
+            else
+            {
+                data = "";
+            }
+
+            return data;
+        }
+
+        private void BuildButtonPanel(bool roomAvailable)
+        {
+            if( roomAvailable )
+            {
+                Button_StartMeeting.Visibility = Visibility.Visible;
+                Button_EndMeeting.Visibility = Visibility.Collapsed;
+                Button_ExtendMeeting.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Button_StartMeeting.Visibility = Visibility.Collapsed;
+                Button_EndMeeting.Visibility = Visibility.Visible;
+                Button_ExtendMeeting.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Button_EndMeeting_Click(object sender, RoutedEventArgs e)
+        {
+            meetingsManager.EndMeeting();
+            LoadCurrentMeetingInfo();
+        }
+
+        private async void Button_ExtendMeeting_Click(object sender, RoutedEventArgs e)
+        {
+            CalendarEvent meetingInfo = meetingsManager.GetMeetingInfo();
+
+            string[] timeBlocks = GetTimeBlocks(meetingInfo.End.ToLocalTime());
+
+            var messageDialog = new MessageDialog("How long would you like to extend this room booking?");
+
+            messageDialog.Commands.Add(new UICommand(timeBlocks[0], new UICommandInvokedHandler(this.CommandExtendOneBlock)));
+            messageDialog.Commands.Add(new UICommand(timeBlocks[1], new UICommandInvokedHandler(this.CommandExtendTwoBlocks)));
+            messageDialog.Commands.Add(new UICommand(timeBlocks[2], new UICommandInvokedHandler(this.CommandExtendThreeBlocks)));
+
+            // Show the message dialog
+            await messageDialog.ShowAsync();
+        }
+
+        private void BookMeeting(int blocks)
+        {
+            meetingsManager.BookMeeting(blocks);
+            LoadCurrentMeetingInfo();
+        }
+
+        private void ExtendMeeting(int blocks)
+        {
+            meetingsManager.ExtendMeeting(blocks);
+            LoadCurrentMeetingInfo();
         }
     }
 }
